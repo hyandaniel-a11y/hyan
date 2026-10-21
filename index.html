@@ -1,1 +1,814 @@
- 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Blog de Mecânica</title>
+
+    <meta
+        name="description"
+        content="Dicas de mecânica, manutenção automotiva e curiosidades para cuidar melhor do seu carro."
+    >
+
+    <style>
+        :root {
+            --bg: #0b0d10;
+            --bg-card: #14181d;
+            --bg-card-hover: #1a2027;
+            --text: #f5f5f5;
+            --muted: #a8afb8;
+            --primary: #ff6b00;
+            --primary-light: #ff8c32;
+            --border: rgba(255, 255, 255, 0.08);
+            --max-width: 1100px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top right, rgba(255, 107, 0, 0.12), transparent 35%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(11, 13, 16, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .navbar {
+            width: min(100% - 40px, var(--max-width));
+            margin: auto;
+            min-height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+
+            border-radius: 12px;
+            background: var(--primary);
+            color: #111;
+            font-size: 1.3rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: 0.25s;
+        }
+
+        nav a:hover {
+            color: var(--primary-light);
+        }
+
+        /* HERO */
+
+        .hero {
+            width: min(100% - 40px, var(--max-width));
+            min-height: 430px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "⚙";
+            position: absolute;
+            right: 30px;
+            top: 30px;
+
+            font-size: 20rem;
+            color: rgba(255, 107, 0, 0.035);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 720px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tag {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 7px 14px;
+
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            border-radius: 50px;
+
+            background: rgba(255, 107, 0, 0.08);
+            color: var(--primary-light);
+
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            line-height: 1;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            max-width: 650px;
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        /* MAIN */
+
+        main {
+            width: min(100% - 40px, 850px);
+            margin: 20px auto 80px;
+        }
+
+        .post {
+            overflow: hidden;
+
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .post-header {
+            padding: 35px 35px 25px;
+        }
+
+        .post-category {
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .post h2 {
+            margin: 8px 0 12px;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.15;
+        }
+
+        .author {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* IMAGEM */
+
+        .car-image {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+
+            display: block;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 107, 0, 0.35),
+                    rgba(0, 0, 0, 0.8)
+                ),
+                url("https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=1400&q=80")
+                center / cover;
+        }
+
+        /* CONTEÚDO */
+
+        .post-content {
+            padding: 35px;
+        }
+
+        .intro {
+            color: #d8dce1;
+            font-size: 1.08rem;
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin: 35px 0 22px;
+
+            font-size: 1.45rem;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 5px;
+            height: 28px;
+
+            border-radius: 10px;
+            background: var(--primary);
+        }
+
+        /* DICAS */
+
+        .tips {
+            display: grid;
+            gap: 16px;
+        }
+
+        .tip {
+            padding: 22px;
+
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            background: #101419;
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .tip:hover {
+            transform: translateY(-3px);
+            background: var(--bg-card-hover);
+            border-color: rgba(255, 107, 0, 0.35);
+        }
+
+        .tip-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .tip-icon {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            flex-shrink: 0;
+
+            border-radius: 10px;
+            background: rgba(255, 107, 0, 0.12);
+            color: var(--primary-light);
+        }
+
+        .tip h3 {
+            font-size: 1.05rem;
+        }
+
+        .tip p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* ALERTA */
+
+        .warning {
+            margin-top: 30px;
+            padding: 20px;
+
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+
+            background: rgba(255, 107, 0, 0.08);
+        }
+
+        .warning strong {
+            color: var(--primary-light);
+        }
+
+        /* INTERAÇÕES: CURTIDAS E COMENTÁRIOS */
+
+        .post-actions {
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .btn-like {
+            background: rgba(255, 107, 0, 0.12);
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            color: var(--primary-light);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.25s;
+        }
+
+        .btn-like:hover {
+            background: var(--primary);
+            color: #111;
+        }
+
+        .btn-like.liked {
+            background: var(--primary);
+            color: #111;
+        }
+
+        .comments-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+        }
+
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .comment-form input,
+        .comment-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: #101419;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .comment-form input:focus,
+        .comment-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .comment-form button {
+            align-self: flex-start;
+            background: var(--primary);
+            color: #111;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .comment-form button:hover {
+            background: var(--primary-light);
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .comment-item {
+            background: #101419;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .comment-author {
+            font-weight: 700;
+            color: var(--primary-light);
+            font-size: 0.95rem;
+        }
+
+        .comment-date {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .comment-text {
+            color: #d8dce1;
+            font-size: 0.95rem;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 35px 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+        }
+
+        footer strong {
+            color: var(--primary-light);
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 700px) {
+            .navbar {
+                min-height: 65px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                min-height: 380px;
+            }
+
+            .hero::before {
+                font-size: 12rem;
+                right: -20px;
+                top: 80px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .post-header,
+            .post-content {
+                padding: 25px 20px;
+            }
+
+            .car-image {
+                height: 240px;
+            }
+
+            .tip {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header>
+        <div class="navbar">
+
+            <a href="#" class="logo">
+                <span class="logo-icon">🔧</span>
+                <span>Mecânica<span style="color: #ff6b00;">Blog</span></span>
+            </a>
+
+            <nav>
+                <a href="#inicio">Início</a>
+                <a href="#post">Artigos</a>
+                <a href="#dicas">Dicas</a>
+                <a href="#comentarios">Comentários</a>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+
+        <div class="hero-content">
+
+            <span class="tag">🛠️ Conhecimento automotivo</span>
+
+            <h1>
+                Meu Blog de
+                <span>Mecânica</span>
+            </h1>
+
+            <p>
+                Um espaço para compartilhar dicas de mecânica,
+                manutenção automotiva e curiosidades para quem
+                gosta de entender melhor o mundo dos carros.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+
+        <article class="post" id="post">
+
+            <div class="post-header">
+
+                <span class="post-category">
+                    Primeiro artigo
+                </span>
+
+                <h2>
+                    Como evitar golpes e problemas
+                    na oficina mecânica
+                </h2>
+
+                <p class="author">
+                    Por <strong>Hyan</strong> · Dicas de Mecânica
+                </p>
+
+            </div>
+
+            <!-- Imagem -->
+            <div class="car-image" role="img" aria-label="Carro sendo reparado em uma oficina mecânica"></div>
+
+            <div class="post-content">
+
+                <p class="intro">
+                    Boas-vindas ao meu blog! Aqui vou compartilhar
+                    dicas de mecânica, manutenção automotiva e
+                    curiosidades da área para ajudar você a cuidar
+                    melhor do seu carro e tomar decisões mais
+                    conscientes na oficina. 🛠️
+                </p>
+
+                <h2 class="section-title" id="dicas">
+                    Cuidados importantes
+                </h2>
+
+                <div class="tips">
+
+                    <!-- DICA 1 -->
+                    <div class="tip">
+
+                        <div class="tip-header">
+                            <div class="tip-icon">🔍</div>
+
+                            <h3>
+                                Desconfie de diagnósticos sem verificação
+                            </h3>
+                        </div>
+
+                        <p>
+                            Um diagnóstico sério deve ser baseado em
+                            evidências. Quando possível, peça ao
+                            profissional que explique quais testes,
+                            medições ou inspeções foram realizados antes
+                            de recomendar uma troca de peça.
+                        </p>
+
+                    </div>
+
+                    <!-- DICA 2 -->
+                    <div class="tip">
+
+                        <div class="tip-header">
+                            <div class="tip-icon">💬</div>
+
+                            <h3>
+                                Peça uma explicação simples
+                            </h3>
+                        </div>
+
+                        <p>
+                            Termos técnicos fazem parte da mecânica,
+                            mas você tem o direito de entender o problema.
+                            Peça para o mecânico explicar o defeito,
+                            mostrar a peça afetada e informar o motivo
+                            da substituição.
+                        </p>
+
+                    </div>
+
+                    <!-- DICA 3 -->
+                    <div class="tip">
+
+                        <div class="tip-header">
+                            <div class="tip-icon">⚙️</div>
+
+                            <h3>
+                                Alinhamento e suspensão
+                            </h3>
+                        </div>
+
+                        <p>
+                            O alinhamento não corrige folgas ou peças
+                            desgastadas da suspensão. Antes de realizar
+                            o serviço, é importante verificar o estado
+                            dos componentes e corrigir eventuais problemas.
+                        </p>
+
+                    </div>
+
+                    <!-- DICA 4 -->
+                    <div class="tip">
+
+                        <div class="tip-header">
+                            <div class="tip-icon">🛢️</div>
+
+                            <h3>
+                                Atenção à viscosidade do óleo
+                            </h3>
+                        </div>
+
+                        <p>
+                            Não altere a viscosidade do óleo apenas porque
+                            o veículo ultrapassou determinada quilometragem.
+                            A escolha deve seguir principalmente as
+                            especificações recomendadas pelo fabricante
+                            do veículo.
+                        </p>
+
+                    </div>
+
+                    <!-- DICA 5 -->
+                    <div class="tip">
+
+                        <div class="tip-header">
+                            <div class="tip-icon">💧</div>
+
+                            <h3>
+                                Cuide do sistema de arrefecimento
+                            </h3>
+                        </div>
+
+                        <p>
+                            O sistema de arrefecimento precisa utilizar o
+                            fluido adequado e na proporção recomendada.
+                            Evite usar água de torneira como solução
+                            permanente, pois os minerais podem favorecer
+                            corrosão e depósitos no sistema.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- AVISO -->
+                <div class="warning">
+
+                    <strong>💡 Dica de ouro:</strong>
+
+                    <p>
+                        Sempre que possível, peça um orçamento detalhado,
+                        compare preços e procure uma oficina de confiança.
+                        Manutenção preventiva costuma ser muito mais barata
+                        do que esperar uma falha grave acontecer.
+                    </p>
+
+                </div>
+
+                <!-- AÇÕES (CURTIDAS) -->
+                <div class="post-actions">
+                    <button class="btn-like" id="likeBtn">
+                        ❤️ <span id="likeCount">12</span> Curtidas
+                    </button>
+                </div>
+
+                <!-- SEÇÃO DE COMENTÁRIOS -->
+                <section class="comments-section" id="comentarios">
+                    <h2 class="section-title">Comentários</h2>
+
+                    <form class="comment-form" id="commentForm">
+                        <input type="text" id="authorInput" placeholder="Seu nome" required>
+                        <textarea id="commentInput" rows="3" placeholder="Escreva seu comentário..." required></textarea>
+                        <button type="submit">Enviar comentário</button>
+                    </form>
+
+                    <div class="comments-list" id="commentsList">
+                        <!-- Comentário Exemplo -->
+                        <div class="comment-item">
+                            <div class="comment-header">
+                                <span class="comment-author">Carlos Eduardo</span>
+                                <span class="comment-date">Agora mesmo</span>
+                            </div>
+                            <p class="comment-text">Muito bom o artigo! A dica sobre a viscosidade do óleo é fundamental.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+        </article>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer>
+
+        <p>
+            © 2026 <strong>MecânicaBlog</strong>.
+            Conteúdo sobre mecânica e manutenção automotiva.
+        </p>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Sistema de Curtidas
+        const likeBtn = document.getElementById('likeBtn');
+        const likeCount = document.getElementById('likeCount');
+        let count = parseInt(likeCount.innerText);
+        let isLiked = false;
+
+        likeBtn.addEventListener('click', () => {
+            if (!isLiked) {
+                count++;
+                likeBtn.classList.add('liked');
+                isLiked = true;
+            } else {
+                count--;
+                likeBtn.classList.remove('liked');
+                isLiked = false;
+            }
+            likeCount.innerText = count;
+        });
+
+        // Sistema de Comentários
+        const commentForm = document.getElementById('commentForm');
+        const authorInput = document.getElementById('authorInput');
+        const commentInput = document.getElementById('commentInput');
+        const commentsList = document.getElementById('commentsList');
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const author = authorInput.value.trim();
+            const text = commentInput.value.trim();
+
+            if (author && text) {
+                const commentItem = document.createElement('div');
+                commentItem.className = 'comment-item';
+
+                commentItem.innerHTML = `
+                    <div class="comment-header">
+                        <span class="comment-author">${author}</span>
+                        <span class="comment-date">Agora mesmo</span>
+                    </div>
+                    <p class="comment-text">${text}</p>
+                `;
+
+                commentsList.prepend(commentItem);
+
+                // Limpa o formulário
+                authorInput.value = '';
+                commentInput.value = '';
+            }
+        });
+    </script>
+
+</body>
+</html>
